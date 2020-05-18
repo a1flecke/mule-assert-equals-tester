@@ -21,7 +21,7 @@ readUrl('classpath://example.json', 'application/json')]" doc:name="Set Expected
 output application/json
 ---
 readUrl('classpath://example.json', 'application/json')]" doc:name="Set test value" doc:id="6f2d5a2c-db59-43ca-8840-dbcea43d5fc6" variableName="testValue"/>
-			<munit-tools:assert-equals doc:name="Assert equals" doc:id="2b42010e-d56f-4f38-9fe5-d630cee23a96" actual="#[vars.testValue]" expected="#[vars.expectedValue]" message="***THIS SHOULD NOT FAIL BUT WILL***"/>
+			<munit-tools:assert-that doc:name="Assert that" doc:id="49fef3a1-3efb-4883-bfb4-17db6d07edfe" is="#[MunitTools::equalTo(vars.expectedValue)]" message="*** THIS WILL NOT FAIL AND IT SHOULD NOT ***" expression="#[vars.testValue]"/>
 		</munit:validation>
 	</munit:test>
 
