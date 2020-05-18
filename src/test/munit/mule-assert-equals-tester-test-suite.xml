@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="mule-assert-equals-tester-test-suite.xml" />
+	<munit:test name="mule-assert-equals-tester-test-suite-mule-assert-equals-testerFlowTest" doc:id="74b6d1ba-dda9-46f4-8e71-9919d5e35cb4" description="Test">
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to mule-assert-equals-testerFlow" doc:id="a3ffd896-bc21-4415-8890-26032cd0c634" name="mule-assert-equals-testerFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<set-variable value="#[%dw 2.0
+output application/json
+---
+readUrl('classpath://example.json', 'application/json')]" doc:name="Set Expected Value" doc:id="86cec4a1-5cf4-4bcb-bbbe-e97ee694aa6f" variableName="expectedValue"/>
+			<set-variable value="#[%dw 2.0
+output application/json
+---
+readUrl('classpath://example.json', 'application/json')]" doc:name="Set test value" doc:id="6f2d5a2c-db59-43ca-8840-dbcea43d5fc6" variableName="testValue"/>
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="2b42010e-d56f-4f38-9fe5-d630cee23a96" actual="#[vars.testValue]" expected="#[vars.expectedValue]" message="***THIS SHOULD NOT FAIL BUT WILL***"/>
+		</munit:validation>
+	</munit:test>
+
+</mule>

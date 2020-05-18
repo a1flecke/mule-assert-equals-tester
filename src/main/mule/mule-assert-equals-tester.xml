@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="7825bea2-c37f-4c12-afa3-3a96ab93a866" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="mule-assert-equals-testerFlow" doc:id="cb4dbc85-201e-4221-a220-abd0ab23bb60" >
+		<http:listener doc:name="Listener" doc:id="e7a9fcaf-85e8-48d3-b8bc-9e54b31792cb" config-ref="HTTP_Listener_config" path="/test"/>
+		<set-payload value="#[payload ++ 1]" doc:name="Set Payload" doc:id="236def1a-4cbf-4ee4-bd44-4e851d4c69cb" />
+	</flow>
+</mule>
